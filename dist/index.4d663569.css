@@ -1,5 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Comfortaa&display=swap');
-
+@import "https://fonts.googleapis.com/css2?family=Comfortaa&display=swap";
 body {
     font-family: 'Comfortaa', cursive;
 }
@@ -60,3 +59,5 @@ body {
 .intro img {
     max-width: 90%;
 }
+
+/*# sourceMappingURL=index.4d663569.css.map */
