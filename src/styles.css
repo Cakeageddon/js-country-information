@@ -55,8 +55,13 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    text-align: center;
 }
 
 .intro img {
     max-width: 90%;
+}
+
+.globe-with-pins {
+    max-height: 250px;
 }

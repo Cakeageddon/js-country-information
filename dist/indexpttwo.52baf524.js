@@ -140,13 +140,13 @@
       this[globalName] = mainExports;
     }
   }
-})({"5bH3W":[function(require,module,exports) {
+})({"gNvOh":[function(require,module,exports) {
 "use strict";
 var HMR_HOST = null;
 var HMR_PORT = null;
 var HMR_SECURE = false;
 var HMR_ENV_HASH = "d6ea1d42532a7575";
-module.bundle.HMR_BUNDLE_ID = "fe4256060641b553";
+module.bundle.HMR_BUNDLE_ID = "30f2c0d652baf524";
 function _createForOfIteratorHelper(o, allowArrayLike) {
     var it;
     if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) {
@@ -458,50 +458,57 @@ function hmrAcceptRun(bundle, id) {
     acceptedAssets[id] = true;
 }
 
-},{}],"bNKaB":[function(require,module,exports) {
+},{}],"dmbiF":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+//*************************************** PART 2 **********************************************************************
 var _axios = require("axios");
 var _axiosDefault = parcelHelpers.interopDefault(_axios);
-const countryList = document.getElementById("countries");
-//*************************************** PART 1 **********************************************************************
-async function fetchWorld() {
+const countrySearchResult = document.getElementById("countryResult");
+const errorMessage = document.getElementById("error");
+const searchCity = document.getElementById("searchButton");
+searchCity.addEventListener('submit', sendData);
+function sendData(e) {
+    e.preventDefault();
+    const valInput = document.getElementById('city-input');
+    fetchCountryData(valInput.value);
+    valInput.value = "";
+}
+async function fetchCountryData(name) {
+    countrySearchResult.innerHTML = ``;
     try {
-        const resultWorld = await _axiosDefault.default.get('https://restcountries.com/v2/all');
-        const countries = resultWorld.data;
-        countries.sort((a, b)=>{
-            return a.population - b.population;
-        });
-        listingIt(countries);
+        const resultCountry = await _axiosDefault.default.get(`https://restcountries.com/v2/name/${name}`);
+        const country = resultCountry.data[0];
+        errorMessage.innerHTML = "";
+        listingItTwo(country);
     } catch (e) {
         console.error(e);
+        errorMessage.innerHTML = `
+        <h2>Oepsie woepsie!</h2>
+        <p>De site is stukkie-wukkie!</p>
+        <p>Ziet ernaar uit dat er iets mis is gegaan.</p>
+        <p>Is de invoer correct?</p>
+        `;
     }
 }
-fetchWorld();
-function listingIt(countryArr) {
-    const worldList = countryArr.map((country)=>{
-        countryColor(country);
-        return `
-        <li class="country">
-            <h3 class="${countryColor(country.region)}"><img src="${country.flag}" alt="De vlag" height="20">  ${country.name}</h3>
-            <p>Has a population of ${country.population}</p>
-        </li> `;
-    });
-    countryList.innerHTML = `${worldList.join('')}`;
+function listingItTwo(country) {
+    countrySearchResult.innerHTML = `
+    <div>
+        <h2><img src="${country.flag}" alt="De vlag" height="60"> ${country.name}</h2>
+        <p>${country.name} is situated in ${country.subregion}</p>
+        <p>It has a population of ${country.population}</p>
+        <p>The capital is ${country.capital} and you can pay with ${currencyString(country.currencies)}</p>
+    </div>
+    `;
 }
-function countryColor(region) {
-    switch(region){
-        case 'Africa':
-            return "myBlue";
-        case 'Americas':
-            return "myGreen";
-        case 'Asia':
-            return "myRed";
-        case 'Europe':
-            return "myYellow";
-        case 'Oceania':
-            return "myPurple";
-        default:
-            return "myBlack";
+function currencyString(currencies) {
+    if (currencies.length === 1) return currencies[0].name;
+    else {
+        let availableCurrencies = '';
+        for(let i = 0; i < currencies.length; i++){
+            availableCurrencies = availableCurrencies + `${currencies[i].name}`;
+            if (i < currencies.length - 1) availableCurrencies = `${availableCurrencies} and `;
+        }
+        return availableCurrencies;
     }
 }
 
@@ -2099,6 +2106,6 @@ exports.export = function(dest, destName, get) {
     });
 };
 
-},{}]},["5bH3W","bNKaB"], "bNKaB", "parcelRequirecb08")
+},{}]},["gNvOh","dmbiF"], "dmbiF", "parcelRequirecb08")
 
-//# sourceMappingURL=index.0641b553.js.map
+//# sourceMappingURL=indexpttwo.52baf524.js.map
