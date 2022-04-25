@@ -1,7 +1,10 @@
 import axios from "axios";
 
-const errorMessage = document.getElementById("error")
-const countryList = document.getElementById("countries")
+
+const countryList = document.getElementById("countries");
+
+
+//*************************************** PART 1 **********************************************************************
 
 async function fetchWorld() {
     try {
